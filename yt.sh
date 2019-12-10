@@ -13,9 +13,10 @@ do
 
 
 
-echo -e  "\e[1;34m*********youtube script **********\e[0m"
-echo -e "\e[1;34m                 by alan sarkar\e[0m"
-echo -e "\e[1;34m*********************************\e[0m"
+echo -e  "\e[1;34m*********youtube script ****************\e[0m"
+echo -e "\e[1;34m                 by Alan Sarkar\e[0m"
+echo -e "\e[1;34m         https://twitter.com/alan_sarkar_\e[0m"
+echo -e "\e[1;34m*****************************************\e[0m"
 
 echo -e "\e[1;31m Enter what you want to search:\e[0m"
 read x ;
