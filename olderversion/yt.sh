@@ -1,14 +1,4 @@
-#!/bin/sh
 
-
-
-clear
-#echo "search again? if yes press 1"
-#read  re;
-clear
-done
-rm -rf /home/$(whoami)/.ytcache
-->> ~$ clear
 #!/bin/sh
 
 
