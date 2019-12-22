@@ -13,7 +13,7 @@ go to other pages and  then select what  video you would like to watch.
 * firejail (sandbox for privacy) <br>
 
 # Installation
-# # Easy way
+## Easy way
 
 Open a terminal window (optionally cd to a $PATH directory) and do: <br >
 
