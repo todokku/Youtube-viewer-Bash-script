@@ -21,5 +21,3 @@ Open a terminal window (optionally cd to a $PATH directory) and do: <br >
 
 
 
-#depending of what verson of bash you have there could be output error 
-If there is a error on output use the script inside the folder  "older versons"
