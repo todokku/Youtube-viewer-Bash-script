@@ -1,17 +1,6 @@
 #!/bin/sh
 
 
-
-clear
-#echo "search again? if yes press 1"
-#read  re;
-clear
-done
-rm -rf /home/$(whoami)/.ytcache
-->> ~$ clear
-#!/bin/sh
-
-
 rm -rf /home/$(whoami)/.ytcache
 /bin/clear
 re=1
