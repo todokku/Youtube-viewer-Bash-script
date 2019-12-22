@@ -26,7 +26,7 @@ mostly just run the script and type what ever you want to search and thats it.
 * press q to quit out of video or the search options
 * Enter 'n' to switch through pages
 
-###older verson file
+### older verson file
 This version is actually for stable Distributions  <br >
 If you have debian or a distro with older version of busybox < br >
 you might want to download this version to fixing the text output error< br >
