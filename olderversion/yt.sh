@@ -1,20 +1,16 @@
-#!/bin/sh
-
-
-
+#!/usr/bin/sh
 rm -rf /home/$(whoami)/.ytcache
 /bin/clear
 re=1
 #redo
 
-
 while [  $re != q  ]
 do
 
-echo   "\e[1;34m*********youtube script ****************\e[0m"
-echo  "\e[1;34m                 by Alan Sarkar\e[0m"
-echo  "\e[1;34m         https://twitter.com/alan_sarkar_\e[0m"
-echo  "\e[1;34m*****************************************\e[0m"
+
+echo "\e[1;34m*********************************\e[0m"
+echo  "\e[1;34m*********youtube script **********\e[0m"
+echo "\e[1;34m*********************************\e[0m"
 
 echo "\e[1;31m Enter what you want to search:\e[0m"
 read x ;
@@ -33,7 +29,7 @@ while [ $re2 -eq 1 ]
 do
 y=1
 
-z=$(cat /home/$(whoami)/.ytcache | cut -c282-400 | sed 's/" aria.*//g'  | sed 's/^/ 1. /g'  | wc -l)
+z=$(cat /home/$(whoami)/.ytcache | cut -c282-400 | sed 's/" aria.*//g; s/^/ 1. /g'  | wc -l)
 
 #echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreload=10)"  | grep '<a href="/watch?v=' 
 
@@ -42,16 +38,16 @@ while [ $y  -le $z ]
 do
 
 printf " $y. "
-#cat /home/$(whoami)/.ytcache |  sed   's/.*"  title="//g'  | sed 's/" aria.*//g'  | head -$y | tail -1
-#cat /home/$(whoami)/.ytcache | cut -c282-400 | sed 's/.*title="//g' | sed 's/" aria.*//g' | head -$y | tail -1
-#echo  "\e[1;33m$(cat /home/$(whoami)/.ytcache  | sed 's/.*"  title="//g' | sed 's/" aria.*//g'| sed 's/rel="spf-prefetch//g'| head -$y | tail -1)\e[0m"
-#echo "\e[1;31m$(cat /home/$(whoami)/.ytcache | sed 's/.*"  title="//g' | sed 's/" aria.*//g'| sed 's/" rel="spf-prefetch//g' |head -$y | tail -1)\e[0m"
-echo "\e[1;31m$(cat /home/$(whoami)/.ytcache | sed 's/.*"  title="//g' | sed 's/" aria.*//g'| sed 's/" rel="spf-prefetch//g'| sed 's/&amp;/\&/g' |head -$y | tail -1)\e[0m"
+#cat /home/$(whoami)/.ytcache |  sed   's/.*"  title="//g; s/" aria.*//g'  | head -$y | tail -1
+#cat /home/$(whoami)/.ytcache | cut -c282-400 | sed 's/.*title="//g; s/" aria.*//g' | head -$y | tail -1
+#echo  "\e[1;33m$(cat /home/$(whoami)/.ytcache  | sed 's/.*"  title="//g; s/" aria.*//g; s/rel="spf-prefetch//g'| head -$y | tail -1)\e[0m"
+#echo "\e[1;31m$(cat /home/$(whoami)/.ytcache | sed 's/.*"  title="//g; s/" aria.*//g; s/" rel="spf-prefetch//g' |head -$y | tail -1)\e[0m"
+echo "\e[1;31m$(cat /home/$(whoami)/.ytcache | sed 's/.*"  title="//g; s/" aria.*//g; s/" rel="spf-prefetch//g; s/&amp;/\&/g' |head -$y | tail -1)\e[0m"
 
 
 #channel
-#cat .ytcache  | grep /channel/  | sed 's/.*><a href="//g' | sed 's/" class="yt-uix-sessionlink.*//g' | head -$y | tail -1
-#cat .ytcache  | grep /channel/  | sed 's/.*><a href="//g' | sed 's/.*" >//g' | sed 's/<\/a><\/div>.*//g' 
+#cat .ytcache  | grep /channel/  | sed 's/.*><a href="//g; s/" class="yt-uix-sessionlink.*//g' | head -$y | tail -1
+#cat .ytcache  | grep /channel/  | sed 's/.*><a href="//g; s/.*" >//g; s/<\/a><\/div>.*//g' 
 
 #cat /home/$(whoami)/.ytcache | cut -c282-400  | sed 's/" aria.*//g' | head -$y | tail -1
 cat /home/$(whoami)/.ytcache | cut -c85-95| head -$y | tail -1
@@ -67,14 +63,14 @@ echo  " Enter n to go to other pages"
 read p ;
 
 
-if [ $p != q ] && [ $p != n ]
+if [ "$p" != q ] && [ "$p" != n ] && [[ "$p" =~ ^[0-9]+$ ]]
 then
 q=$(cat /home/$(whoami)/.ytcache | cut -c85-95 | head -$p | tail -1 )
 clear
 
 echo "\e[0;37m Now Playing: \e[0m"
 echo " "
-echo "\e[1;31m$(cat /home/$(whoami)/.ytcache  | sed 's/.*"  title="//g' | sed 's/" aria.*//g'| sed 's/rel="spf-prefetch//g' | sed 's/&amp;/\&/g'| head -$p | tail -1)\e[0m"
+echo "\e[1;31m$(cat /home/$(whoami)/.ytcache  | sed 's/.*"  title="//g; s/" aria.*//g; s/rel="spf-prefetch//g; s/&amp;/\&/g'| head -$p | tail -1)\e[0m"
 echo "\e[1;31m$(echo "Link: https://www.youtube.com/watch?v=$q")\e[0m"
 
 echo " "
@@ -83,19 +79,23 @@ echo "\e[0;37m Description: \e[0m"
 #then
 #echo : enter the number you want to see"
 #read q
-echo  "\e[1;34m$(firejail wget -qO-  "https://www.youtube.com/watch?v=$q" | grep "watch-description-extras"  | sed 's/<br[^>]*>/\n/g' |sed -e 's/<[^>]*>//g')\e[0m"
+echo  "\e[1;34m$(firejail wget -qO-  "https://www.youtube.com/watch?v=$q" | grep "watch-description-extras"  | sed 's/<br[^>]*>/\n/g; s/<[^>]*>//g')\e[0m"
 #fi
 echo "" 
 
-
 firejail --quiet   mpv --ytdl-format=best --quiet "https://www.youtube.com/watch?v=$q"
+
+mpv=1 # for conflict
+
+
 fi
 
 
-if [ $p = q ]
+if [ "$p" = q ]
 then
 clear
 re2=0
+#re=q   # complete exit var
 rm -rf /home/$(whoami)/.ytcache
 fi
 #echo "see the search result again? press 1"
@@ -104,17 +104,17 @@ fi
 
 
 #next page
-if [ $p = n ]
+if [ "$p" = n ]
 then
 echo "\e[1;37mEnter the page number\e[0m"
 read xx
 
-if [ $xx -eq 1 ]
+if [ "$xx" -eq 1 ] && [[ "$xx" =~ ^[0-9]+$ ]]
 then
 echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
 fi
 
-if [ $xx != 1 ]
+if [ "$xx" != 1 ] && [[ "$xx" =~ ^[0-9]+$ ]]
 then
 xx=$(expr $xx - 1) 
 clear
@@ -125,10 +125,21 @@ echo "\e[1;37mpage no $(expr $xx + 1)\e[0m"
 echo "URL: https://www.youtube.com/results?search_query="$rage" "
 echo ""
 echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$rage")" | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+fi
+fi # end of $p = n
 
+
+
+if  [ "$p" != n ] && [ "$p" != q  ] && [[ "$mpv" != 1 ]]
+then
+ 
+echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$p"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+x="$p"
 fi
 
-fi
+
+mpv=0 # reset conflict var
+
 
 done
 clear
