@@ -1,7 +1,7 @@
 # Youtube-viewer-Bash-script
 
 Watch youtube videos with runing this simple bash script <br>
-only 150 line bash script code simple script 
+only 100 line bash script code simple script 
 
 This is a simple script just search what you type and then can scroll and  <br>
 go to other pages and  then select what  video you would like to watch.
