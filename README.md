@@ -28,5 +28,5 @@ mostly just run the script and type what ever you want to search and thats it.
 
 #### older verson folder
 This version is actually for Distributions  with stable repositories or older versions of packages <br >
-If you have Debian stable or a distro similiar < br >
-you might want to download this version to fixing the text output error< br >
+If you have Debian stable or a distro similiar <br >
+you might want to download this version to fixing the text output error<br >
