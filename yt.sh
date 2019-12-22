@@ -1,5 +1,4 @@
-#!/bin/sh
-
+#!/usr/bin/sh
 
 
 rm -rf /home/$(whoami)/.ytcache
@@ -12,11 +11,11 @@ while [  $re != q  ]
 do
 
 
+echo -e "\e[1;34m*********************************\e[0m"
 
-echo -e  "\e[1;34m*********youtube script ****************\e[0m"
-echo -e "\e[1;34m                 by Alan Sarkar\e[0m"
-echo -e "\e[1;34m         https://twitter.com/alan_sarkar_\e[0m"
-echo -e "\e[1;34m*****************************************\e[0m"
+echo -e  "\e[1;34m*********youtube script **********\e[0m"
+
+echo -e "\e[1;34m*********************************\e[0m"
 
 echo -e "\e[1;31m Enter what you want to search:\e[0m"
 read x ;
@@ -69,7 +68,7 @@ echo  " Enter n to go to other pages"
 read p ;
 
 
-if [ $p != q ] && [ $p != n ]
+if [ "$p" != q ] && [ "$p" != n ] && [[ "$p" =~ ^[0-9]+$ ]]
 then
 q=$(cat /home/$(whoami)/.ytcache | cut -c85-95 | head -$p | tail -1 )
 clear
@@ -91,13 +90,18 @@ echo ""
 
 
 firejail --quiet   mpv --ytdl-format=best --quiet "https://www.youtube.com/watch?v=$q"
+
+mpv=1 # for conflict
+
+
 fi
 
 
-if [ $p = q ]
+if [ "$p" = q ]
 then
 clear
 re2=0
+#re=q   # complete exit var
 rm -rf /home/$(whoami)/.ytcache
 fi
 #echo "see the search result again? press 1"
@@ -106,17 +110,17 @@ fi
 
 
 #next page
-if [ $p = n ]
+if [ "$p" = n ]
 then
 echo -e "\e[1;37mEnter the page number\e[0m"
 read xx
 
-if [ $xx -eq 1 ]
+if [ "$xx" -eq 1 ]
 then
 echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
 fi
 
-if [ $xx != 1 ]
+if [ "$xx" != 1 ]
 then
 xx=$(expr $xx - 1) 
 clear
@@ -127,10 +131,23 @@ echo -e "\e[1;37mpage no $(expr $xx + 1)\e[0m"
 echo "URL: https://www.youtube.com/results?search_query="$rage" "
 echo ""
 echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$rage")" | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+fi
+fi # end of $p = n
 
+
+
+if  [ "$p" != n ] && [ "$p" != q  ] && [[ "$mpv" != 1 ]]
+then
+ 
+echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$p"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+x="$p"
 fi
 
-fi
+
+
+mpv=0 # reset conflict var
+
+
 
 done
 clear
