@@ -1,7 +1,4 @@
-
-
-
-
+#!/bin/sh
 rm -rf /home/$(whoami)/.ytcache
 /bin/clear
 re=1
@@ -12,9 +9,8 @@ while [  $re != q  ]
 do
 
 
-
+echo  "\e[1;34m*********************************\e[0m"
 echo   "\e[1;34m*********youtube script **********\e[0m"
-echo  "\e[1;34m                 by alan sarkar\e[0m"
 echo  "\e[1;34m*********************************\e[0m"
 
 echo  "\e[1;31m Enter what you want to search:\e[0m"
@@ -135,7 +131,6 @@ fi
 fi # end of $p = n
 
 
-
 if  [ "$p" != n ] && [ "$p" != q  ] && [[ "$mpv" != 1 ]]
 then
  
@@ -143,10 +138,7 @@ echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$p"&sp
 x="$p"
 fi
 
-
-
 mpv=0 # reset conflict var
-
 
 
 done
