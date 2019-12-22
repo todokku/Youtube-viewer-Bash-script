@@ -1,15 +1,17 @@
-#!/usr/bin/sh
-
+#!/bin/sh
 rm -rf /home/$(whoami)/.ytcache
 /bin/clear
 re=1
 #redo
+
+
 while [  $re != q  ]
 do
 
 
-echo -e "\e[1;34m*********************************\e[0m"
+
 echo -e  "\e[1;34m*********youtube script **********\e[0m"
+echo -e "\e[1;34m                 by alan sarkar\e[0m"
 echo -e "\e[1;34m*********************************\e[0m"
 
 echo -e "\e[1;31m Enter what you want to search:\e[0m"
@@ -17,10 +19,10 @@ read x ;
 clear
 #echo $x
 
-#echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreload=50)"  | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' > /home/jerome/.ytcache
+#echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreload=50)"  | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' > /home/$(whoami)/.ytcache
 #grep without any playlist
-#echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreload=50)"  | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
-echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+#echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreload=50)"  | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="yt-lockup-playlist-item-length">' > /home/$(whoami)/.ytcache
+echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/$(whoami)/.ytcache
 
 
 #re view search result
@@ -83,11 +85,10 @@ echo -e  "\e[1;34m$(firejail wget -qO-  "https://www.youtube.com/watch?v=$q" | g
 #fi
 echo "" 
 
+
 firejail --quiet   mpv --ytdl-format=best --quiet "https://www.youtube.com/watch?v=$q"
 
 mpv=1 # for conflict
-
-
 fi
 
 
@@ -111,7 +112,7 @@ read xx
 
 if [ "$xx" -eq 1 ] && [[ "$xx" =~ ^[0-9]+$ ]]
 then
-echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/$(whoami)/.ytcache
 fi
 
 if [ "$xx" != 1 ] && [[ "$xx" =~ ^[0-9]+$ ]]
@@ -124,22 +125,21 @@ rage="$x&sp$page"
 echo -e "\e[1;37mpage no $(expr $xx + 1)\e[0m"
 echo "URL: https://www.youtube.com/results?search_query="$rage" "
 echo ""
-echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$rage")" | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$rage")" | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="yt-lockup-playlist-item-length">' > /home/$(whoami)/.ytcache
 fi
 fi # end of $p = n
+
 
 
 if  [ "$p" != n ] && [ "$p" != q  ] && [[ "$mpv" != 1 ]]
 then
  
-echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$p"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$p"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/$(whoami)/.ytcache
 x="$p"
 fi
 
 
 mpv=0 # reset conflict var
-
-
 
 done
 clear
