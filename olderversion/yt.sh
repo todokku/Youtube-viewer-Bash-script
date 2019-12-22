@@ -1,26 +1,31 @@
-#!/usr/bin/sh
+
+
+
+
 rm -rf /home/$(whoami)/.ytcache
 /bin/clear
 re=1
 #redo
 
+
 while [  $re != q  ]
 do
 
 
-echo "\e[1;34m*********************************\e[0m"
-echo  "\e[1;34m*********youtube script **********\e[0m"
-echo "\e[1;34m*********************************\e[0m"
 
-echo "\e[1;31m Enter what you want to search:\e[0m"
+echo   "\e[1;34m*********youtube script **********\e[0m"
+echo  "\e[1;34m                 by alan sarkar\e[0m"
+echo  "\e[1;34m*********************************\e[0m"
+
+echo  "\e[1;31m Enter what you want to search:\e[0m"
 read x ;
 clear
 #echo $x
 
-#echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreload=50)"  | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' > /home/jerome/.ytcache
+#echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreload=50)"  | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' > /home/$(whoami)/.ytcache
 #grep without any playlist
-#echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreload=50)"  | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
-echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+#echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreload=50)"  | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="yt-lockup-playlist-item-length">' > /home/$(whoami)/.ytcache
+echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/$(whoami)/.ytcache
 
 
 #re view search result
@@ -40,9 +45,9 @@ do
 printf " $y. "
 #cat /home/$(whoami)/.ytcache |  sed   's/.*"  title="//g; s/" aria.*//g'  | head -$y | tail -1
 #cat /home/$(whoami)/.ytcache | cut -c282-400 | sed 's/.*title="//g; s/" aria.*//g' | head -$y | tail -1
-#echo  "\e[1;33m$(cat /home/$(whoami)/.ytcache  | sed 's/.*"  title="//g; s/" aria.*//g; s/rel="spf-prefetch//g'| head -$y | tail -1)\e[0m"
-#echo "\e[1;31m$(cat /home/$(whoami)/.ytcache | sed 's/.*"  title="//g; s/" aria.*//g; s/" rel="spf-prefetch//g' |head -$y | tail -1)\e[0m"
-echo "\e[1;31m$(cat /home/$(whoami)/.ytcache | sed 's/.*"  title="//g; s/" aria.*//g; s/" rel="spf-prefetch//g; s/&amp;/\&/g' |head -$y | tail -1)\e[0m"
+#echo   "\e[1;33m$(cat /home/$(whoami)/.ytcache  | sed 's/.*"  title="//g; s/" aria.*//g; s/rel="spf-prefetch//g'| head -$y | tail -1)\e[0m"
+#echo  "\e[1;31m$(cat /home/$(whoami)/.ytcache | sed 's/.*"  title="//g; s/" aria.*//g; s/" rel="spf-prefetch//g' |head -$y | tail -1)\e[0m"
+echo  "\e[1;31m$(cat /home/$(whoami)/.ytcache | sed 's/.*"  title="//g; s/" aria.*//g; s/" rel="spf-prefetch//g; s/&amp;/\&/g' |head -$y | tail -1)\e[0m"
 
 
 #channel
@@ -57,7 +62,7 @@ echo " "
 y=$( expr $y + 1 )
 
 done
-echo "\e[1;36mEnter the number you want to watch or enter q to exit \e[0m"
+echo  "\e[1;36mEnter the number you want to watch or enter q to exit \e[0m"
 #echo " enter d to show only discription"
 echo  " Enter n to go to other pages"
 read p ;
@@ -68,20 +73,21 @@ then
 q=$(cat /home/$(whoami)/.ytcache | cut -c85-95 | head -$p | tail -1 )
 clear
 
-echo "\e[0;37m Now Playing: \e[0m"
+echo  "\e[0;37m Now Playing: \e[0m"
 echo " "
-echo "\e[1;31m$(cat /home/$(whoami)/.ytcache  | sed 's/.*"  title="//g; s/" aria.*//g; s/rel="spf-prefetch//g; s/&amp;/\&/g'| head -$p | tail -1)\e[0m"
-echo "\e[1;31m$(echo "Link: https://www.youtube.com/watch?v=$q")\e[0m"
+echo  "\e[1;31m$(cat /home/$(whoami)/.ytcache  | sed 's/.*"  title="//g; s/" aria.*//g; s/rel="spf-prefetch//g; s/&amp;/\&/g'| head -$p | tail -1)\e[0m"
+echo  "\e[1;31m$(echo "Link: https://www.youtube.com/watch?v=$q")\e[0m"
 
 echo " "
-echo "\e[0;37m Description: \e[0m"
+echo  "\e[0;37m Description: \e[0m"
 #if [ $p -eq d ]
 #then
 #echo : enter the number you want to see"
 #read q
-echo  "\e[1;34m$(firejail wget -qO-  "https://www.youtube.com/watch?v=$q" | grep "watch-description-extras"  | sed 's/<br[^>]*>/\n/g; s/<[^>]*>//g')\e[0m"
+echo   "\e[1;34m$(firejail wget -qO-  "https://www.youtube.com/watch?v=$q" | grep "watch-description-extras"  | sed 's/<br[^>]*>/\n/g; s/<[^>]*>//g')\e[0m"
 #fi
 echo "" 
+
 
 firejail --quiet   mpv --ytdl-format=best --quiet "https://www.youtube.com/watch?v=$q"
 
@@ -106,12 +112,12 @@ fi
 #next page
 if [ "$p" = n ]
 then
-echo "\e[1;37mEnter the page number\e[0m"
+echo  "\e[1;37mEnter the page number\e[0m"
 read xx
 
 if [ "$xx" -eq 1 ] && [[ "$xx" =~ ^[0-9]+$ ]]
 then
-echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$x"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/$(whoami)/.ytcache
 fi
 
 if [ "$xx" != 1 ] && [[ "$xx" =~ ^[0-9]+$ ]]
@@ -121,10 +127,10 @@ clear
 page=$(echo "="$( (wget -qO- https://www.youtube.com/results?search_query=linux&spfreload=10) | grep '="Go to page' | sed 's/.*results?search_query=//g' |sed 's/.*;sp=//g' | sed 's/" class="yt-uix-button.*//g' | sed '1d' | head -$xx | tail -1 )"&spfreeload=10")
 rage="$x&sp$page"
 #echo $rage
-echo "\e[1;37mpage no $(expr $xx + 1)\e[0m"
+echo  "\e[1;37mpage no $(expr $xx + 1)\e[0m"
 echo "URL: https://www.youtube.com/results?search_query="$rage" "
 echo ""
-echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$rage")" | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$rage")" | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-playlist vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="yt-lockup-playlist-item-length">' > /home/$(whoami)/.ytcache
 fi
 fi # end of $p = n
 
@@ -133,12 +139,14 @@ fi # end of $p = n
 if  [ "$p" != n ] && [ "$p" != q  ] && [[ "$mpv" != 1 ]]
 then
  
-echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$p"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/jerome/.ytcache
+echo "$(firejail wget -qO-  https://www.youtube.com/results?search_query="$p"&spfreeload=10)"      | grep '<a href="/watch?v=' | grep -v  '<li><div class="yt-lockup yt-lockup-tile yt-lockup-play    list vve-check clearfix"' | grep -v '<li class="yt-lockup-playlist-item clearfix"><span class="    yt-lockup-playlist-item-length">' > /home/$(whoami)/.ytcache
 x="$p"
 fi
 
 
+
 mpv=0 # reset conflict var
+
 
 
 done
